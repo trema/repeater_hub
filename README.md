@@ -21,17 +21,29 @@ Install
 $ git clone https://github.com/trema/repeater_hub.git
 $ cd repeater_hub
 $ bundle install
-$ bundle exec rake
 ```
 
 
 Play
 ----
 
-Run this controller
+Run this controller:
 
 ```
-% TREMA_TMP=./tmp bundle exec trema run ./lib/repeater_hub.rb
+% bundle exec trema run ./lib/repeater_hub.rb -c trema.conf
+```
+
+Send some packets from host1 to host2, and show received packet stats
+of host2 and host3:
+
+```
+% bundle exec trema send_packets --source host1 --dest host2 --n_pkts 10
+% bundle exec trema show_stats host2 --rx
+ip_dst,tp_dst,ip_src,tp_src,n_pkts,n_octets
+192.168.0.2,1,192.168.0.1,1,10,500
+% bundle exec trema show_stats host3 --rx
+ip_dst,tp_dst,ip_src,tp_src,n_pkts,n_octets
+192.168.0.2,1,192.168.0.1,1,8,400
 ```
 
 Enjoy!

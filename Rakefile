@@ -1,5 +1,5 @@
 task default: [:travis, :cucumber]
 task travis: [:spec, :quality]
-task quality: [:reek, :flog, :flay]
+task quality: [:rubocop, :reek, :flog, :flay]
 
 Dir.glob('tasks/*.rake').each { |each| import each }
