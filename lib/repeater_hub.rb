@@ -1,5 +1,9 @@
 # Repeater hub controller.
 class RepeaterHub < Trema::Controller
+  def start(_args)
+    logger.info 'RepeaterHub started.'
+  end
+
   def packet_in(datapath_id, message)
     send_flow_mod_add(
       datapath_id,
