@@ -1,12 +1,6 @@
 Feature: "Repeater Hub" example
   Background:
-    Given a file named ".trema/config" with:
-    """
-    LOG_DIR: .
-    PID_DIR: .
-    SOCKET_DIR: .
-    """
-    And a file named "network.conf" with:
+    And a file named "trema.conf" with:
     """
     vswitch('repeater_hub') { datapath_id 0xabc }
 
@@ -28,8 +22,22 @@ Feature: "Repeater Hub" example
     link 'repeater_hub', 'host3'
     """
 
+  @sudo
   Scenario: Run
-    Given I successfully run `trema run ../../lib/repeater_hub.rb -c network.conf -d`
+    And I run `trema run ../../lib/repeater_hub.rb -c trema.conf -p . -l . -s .` interactively
+    And I wait for stdout to contain "RepeaterHub started"
+    And I run `sleep 5`
+    When I run `trema send_packets --source host1 --dest host2 --n_pkts 1`
+    And I run `trema show_stats host1 --tx`
+    And I run `trema show_stats host2 --rx`
+    And I run `trema show_stats host3 --rx`
+    Then the output from "trema show_stats host1 --tx" should contain "192.168.0.2,1,192.168.0.1,1,1,50"
+    And the output from "trema show_stats host2 --rx" should contain "192.168.0.2,1,192.168.0.1,1,1,50"
+    And the output from "trema show_stats host3 --rx" should contain "192.168.0.2,1,192.168.0.1,1,1,50"
+  
+  @sudo
+  Scenario: Run as a daemon
+    Given I successfully run `trema run ../../lib/repeater_hub.rb -c trema.conf -d -p . -l . -s .`
     And I run `sleep 5`
     When I successfully run `trema send_packets --source host1 --dest host2 --n_pkts 1`
     And I run `trema show_stats host1 --tx`
