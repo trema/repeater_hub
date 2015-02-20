@@ -30,9 +30,9 @@ Feature: "Repeater Hub" example
     And I run `trema show_stats host1 --tx`
     And I run `trema show_stats host2 --rx`
     And I run `trema show_stats host3 --rx`
-    Then the output from "trema show_stats host1 --tx" should contain "192.168.0.2,1,192.168.0.1,1,1,50"
-    And the output from "trema show_stats host2 --rx" should contain "192.168.0.2,1,192.168.0.1,1,1,50"
-    And the output from "trema show_stats host3 --rx" should contain "192.168.0.2,1,192.168.0.1,1,1,50"
+    Then the stdout from "trema show_stats host1 --tx" should contain "192.168.0.2,1,192.168.0.1,1,1,50"
+    And the stdout from "trema show_stats host2 --rx" should contain "192.168.0.2,1,192.168.0.1,1,1,50"
+    And the stdout from "trema show_stats host3 --rx" should contain "192.168.0.2,1,192.168.0.1,1,1,50"
   
   @sudo
   Scenario: Run as a daemon
@@ -42,6 +42,6 @@ Feature: "Repeater Hub" example
     And I run `trema show_stats host1 --tx`
     And I run `trema show_stats host2 --rx`
     And I run `trema show_stats host3 --rx`
-    Then the output from "trema show_stats host1 --tx" should contain "192.168.0.2,1,192.168.0.1,1,1,50"
-    And the output from "trema show_stats host2 --rx" should contain "192.168.0.2,1,192.168.0.1,1,1,50"
-    And the output from "trema show_stats host3 --rx" should contain "192.168.0.2,1,192.168.0.1,1,1,50"
+    Then the stdout from "trema show_stats host1 --tx" should contain "192.168.0.2,1,192.168.0.1,1,1,50"
+    And the stdout from "trema show_stats host2 --rx" should contain "192.168.0.2,1,192.168.0.1,1,1,50"
+    And the stdout from "trema show_stats host3 --rx" should contain "192.168.0.2,1,192.168.0.1,1,1,50"
