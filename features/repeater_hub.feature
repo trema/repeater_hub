@@ -25,8 +25,7 @@ Feature: "Repeater Hub" example
   @sudo
   Scenario: Run
     And I run `trema run ../../lib/repeater_hub.rb -c trema.conf -p . -l . -s .` interactively
-    And I wait for stdout to contain "RepeaterHub started"
-    And I run `sleep 5`
+    And I run `sleep 8`
     When I run `trema send_packets --source host1 --dest host2 --n_pkts 1`
     And I run `trema show_stats host1 --tx`
     And I run `trema show_stats host2 --rx`
@@ -38,7 +37,7 @@ Feature: "Repeater Hub" example
   @sudo
   Scenario: Run as a daemon
     Given I successfully run `trema run ../../lib/repeater_hub.rb -c trema.conf -d -p . -l . -s .`
-    And I run `sleep 5`
+    And I run `sleep 8`
     When I successfully run `trema send_packets --source host1 --dest host2 --n_pkts 1`
     And I run `trema show_stats host1 --tx`
     And I run `trema show_stats host2 --rx`
