@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'trema', github: 'trema/trema_ruby', branch: 'develop'
+gem 'phut', path: '../phut'
 
 group :development, :test do
   gem 'aruba', require: false
