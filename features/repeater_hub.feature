@@ -1,4 +1,3 @@
-@announce
 Feature: "Repeater Hub" example
   Background:
     Given I set the environment variables to:
@@ -33,21 +32,21 @@ Feature: "Repeater Hub" example
     And I run `trema run ../../lib/repeater_hub.rb -c trema.conf` interactively
     And I run `sleep 8`
     When I run `trema send_packets --source host1 --dest host2`
-    And I run `trema show_stats host1`
-    And I run `trema show_stats host2`
-    And I run `trema show_stats host3`
-    Then the stdout from "trema show_stats host1" should contain "192.168.0.2,1,192.168.0.1,1,1,50"
-    And the stdout from "trema show_stats host2" should contain "192.168.0.2,1,192.168.0.1,1,1,50"
-    And the stdout from "trema show_stats host3" should contain "192.168.0.2,1,192.168.0.1,1,1,50"
+    Then the number of packets received by "host2" should be:
+      |      source | #packets |
+      | 192.168.0.1 |        1 |
+    And the number of packets received by "host3" should be:
+      |      source | #packets |
+      | 192.168.0.1 |        1 |
   
   @sudo
   Scenario: Run as a daemon
-    Given I successfully run `trema run ../../lib/repeater_hub.rb -c trema.conf -d`
+    And I successfully run `trema run ../../lib/repeater_hub.rb -c trema.conf -d`
     And I run `sleep 8`
     When I successfully run `trema send_packets --source host1 --dest host2`
-    And I run `trema show_stats host1`
-    And I run `trema show_stats host2`
-    And I run `trema show_stats host3`
-    Then the stdout from "trema show_stats host1" should contain "192.168.0.2,1,192.168.0.1,1,1,50"
-    And the stdout from "trema show_stats host2" should contain "192.168.0.2,1,192.168.0.1,1,1,50"
-    And the stdout from "trema show_stats host3" should contain "192.168.0.2,1,192.168.0.1,1,1,50"
+    Then the number of packets received by "host2" should be:
+      |      source | #packets |
+      | 192.168.0.1 |        1 |
+    And the number of packets received by "host3" should be:
+      |      source | #packets |
+      | 192.168.0.1 |        1 |
