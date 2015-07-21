@@ -4,6 +4,6 @@ Before('@sudo') do
 end
 
 After('@sudo') do
-  run 'trema killall -S .'
+  run 'trema killall RepeaterHub'
   sleep 3
 end
