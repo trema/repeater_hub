@@ -1,7 +1,7 @@
 # Repeater hub controller.
 class RepeaterHub < Trema::Controller
   def start(_args)
-    logger.info 'RepeaterHub started.'
+    logger.info "#{name} started."
   end
 
   def packet_in(datapath_id, message)
