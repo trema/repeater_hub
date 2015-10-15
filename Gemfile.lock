@@ -212,6 +212,7 @@ DEPENDENCIES
   guard-rspec
   guard-rubocop
   inch
+  rake
   reek
   rspec
   rspec-given
