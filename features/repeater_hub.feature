@@ -30,7 +30,6 @@ Feature: "Repeater Hub" example
   @sudo
   Scenario: Run
     Given I trema run "lib/repeater_hub.rb" interactively with the configuration "trema.conf"
-    And I run `sleep 8`
     When I run `trema send_packets --source host1 --dest host2`
     Then the number of packets received by "host2" should be:
       |      source | #packets |
@@ -42,7 +41,6 @@ Feature: "Repeater Hub" example
   @sudo
   Scenario: Run as a daemon
     Given I trema run "lib/repeater_hub.rb" with the configuration "trema.conf"
-    And I run `sleep 8`
     When I successfully run `trema send_packets --source host1 --dest host2`
     Then the number of packets received by "host2" should be:
       |      source | #packets |
