@@ -1,6 +1,11 @@
 Feature: "Repeater Hub" example
   Background:
-    Given a file named "trema.conf" with:
+    Given I set the environment variables to:
+      | variable         | value |
+      | TREMA_LOG_DIR    | .     |
+      | TREMA_PID_DIR    | .     |
+      | TREMA_SOCKET_DIR | .     |
+    And a file named "trema.conf" with:
       """
       vswitch('repeater_hub') { datapath_id 0xabc }
 
